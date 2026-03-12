@@ -70,6 +70,51 @@ Set `semantic_cluster` based on the note's primary nature:
 - The atlas generation will show orphaned notes
 - If linking to a non-existent note, create it or remove the link
 
+## Definitions and Abbreviations
+
+### Central Glossary
+
+Maintain a central definitions file at `notes/definitions.md` for terms,
+concepts, and abbreviations used across the knowledge base.
+
+### When to Add Definitions
+
+Add to definitions when you:
+
+- Introduce a new technical term or acronym
+- Use an abbreviation that might not be universally understood
+- Define a concept that appears in multiple notes
+- Create a note about a specialized domain (power systems, mathematics, tools)
+
+### Definition Format
+
+```markdown
+### TERM (Abbreviation if applicable)
+
+Definition in your own words. Keep it clear and concise.
+
+- Category: #concept, #tool, #mathematics, #power-systems, etc.
+- Related: [[Related Note 1]], [[Related Note 2]]
+- Source: Where you encountered this term
+```
+
+### Linking to Definitions
+
+- Use wiki-links to connect notes to their definitions:
+  [[Definitions and Abbreviations]]
+- When using an abbreviation for the first time in a note, consider spelling it
+  out
+- Cross-reference related concepts in the Related section of the definition
+
+### Example Workflow
+
+1. Writing a note about power systems that mentions "LMP"
+2. Check if LMP exists in [[Definitions and Abbreviations]]
+3. If not, add it: "LMP (Locational Marginal Price): The cost of supplying the
+   next megawatt..."
+4. Link to relevant notes in the definition's Related section
+5. Continue writing your note, possibly linking back to the definition
+
 ## Content Style
 
 ### Atomic Notes
