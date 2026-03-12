@@ -59,6 +59,5 @@ pure-markdown approach:
 
 ## Backlinks
 
-- [[Semantic Navigation]] ([Semantic Navigation](semantic-navigation.md))
+- [[Semantic Navigation]]
 - [[Knowledge Organization]]
-  ([Knowledge Organization](knowledge-organization.md))

@@ -258,14 +258,12 @@ For PV buses: similar formulation with voltage magnitude constraints.
 
 ## Related
 
-- [[Ward Reduction]] ([Ward Reduction](ward-reduction.md))
-- [[REI Reduction Method]] ([REI Reduction Method](rei-reduction-method.md))
+- [[Ward Reduction]]
+- [[REI Reduction Method]]
 - [[Power Transfer Distribution Factor]]
-  ([Power Transfer Distribution Factor](power-transfer-distribution-factor.md))
-- [[Padé Approximants]] ([Padé Approximants](pade-approximants.md))
+- [[Padé Approximants]]
 - [[Voltage Collapse Analysis]]
-  ([Voltage Collapse Analysis](voltage-collapse-analysis.md))
-- [[MATPOWER]] ([MATPOWER](matpower.md))
-- [[E4ST Model]] ([E4ST Model](e4st-model.md))
+- [[MATPOWER]]
+- [[E4ST Model]]
 
 ## Backlinks
