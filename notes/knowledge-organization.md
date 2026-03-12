@@ -31,9 +31,8 @@ Systems and approaches for organizing information for retrieval and use.
 - Future-proof (no proprietary format)
 - Simple to read and write
 
-See [[Semantic Navigation]] ([Semantic Navigation](semantic-navigation.md)) for
-a modern take on this.
+See [[Semantic Navigation]] for a modern take on this.
 
 ## Backlinks
 
-- [[Zettelkasten]] ([Zettelkasten](zettelkasten.md))
+- [[Zettelkasten]]
