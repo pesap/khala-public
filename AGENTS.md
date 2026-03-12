@@ -9,8 +9,7 @@ How to work with this semantic knowledge base.
 ```bash
 python scripts/add_note.py "Note Title" \
   --source "URL or book citation" \
-  --tags "comma,separated,tags" \
-  --visibility public
+  --tags "comma,separated,tags"
 ```
 
 ### Manual creation (if script unavailable)
@@ -23,9 +22,9 @@ python scripts/add_note.py "Note Title" \
 
 ### Visibility
 
-- This repo is public-only
-- All tracked notes here must use `visibility: public`
-- Do not add private notes or private references here
+- `visibility: private` stays only in this canonical repo
+- `visibility: public` is eligible for export to the public mirror
+- New notes should default to private unless there is a reason to publish them
 
 ## Semantic Organization
 
@@ -115,8 +114,14 @@ Body with [[links]] embedded naturally
 Always regenerate the atlas:
 
 ```bash
+uv run python scripts/generate_atlas.py
+```
+
+If you changed any public note, validate and export the public mirror as needed:
+
+```bash
 uv run python scripts/validate_public_notes.py
-uv run python scripts/generate_atlas.py --visibility public
+uv run python scripts/export_public.py ../khala-public
 ```
 
 ### Periodic Tasks
@@ -147,8 +152,10 @@ ISO 8601: `2026-03-11` or `2026-03-11T14:30:00`
 
 ### Visibility Field
 
-- Use `public` for all notes in this repo
-- Do not introduce private note titles or private wiki-links
+- Use `private` by default for work-related or unpublished notes
+- Use `public` only for notes safe to publish in `khala-public`
+- Public notes must not link to private note titles
+- Public and private notes must not reuse the same title or slug
 
 ### Cluster Evolution
 
@@ -163,17 +170,18 @@ will reflect changes on next generation.
 - Don't over-tag - too many tags dilute meaning
 - Don't worry about perfect organization - the atlas helps you navigate
 - Don't reference private note titles from public notes
-- Don't treat this repo as the canonical private workspace
+- Don't publish by hand, always use the export script
 
 ## Quick Reference
 
-| Task                  | Command                                                                      |
-| --------------------- | ---------------------------------------------------------------------------- |
-| Add note              | `uv run python scripts/add_note.py "Title" --tags "a,b" --visibility public` |
-| Regenerate atlas      | `uv run python scripts/generate_atlas.py --visibility public`                |
-| Validate public notes | `uv run python scripts/validate_public_notes.py`                             |
-| Browse                | Open `atlas.md`                                                              |
-| Find orphans          | Check atlas "Orphaned Notes" section                                         |
+| Task                  | Command                                                  |
+| --------------------- | -------------------------------------------------------- |
+| Add note              | `uv run python scripts/add_note.py "Title" --tags "a,b"` |
+| Regenerate atlas      | `uv run python scripts/generate_atlas.py`                |
+| Validate public notes | `uv run python scripts/validate_public_notes.py`         |
+| Export public repo    | `uv run python scripts/export_public.py ../khala-public` |
+| Browse                | Open `atlas.md`                                          |
+| Find orphans          | Check atlas "Orphaned Notes" section                     |
 
 Remember: **The goal is a web of connected ideas, not a rigid hierarchy.**
 

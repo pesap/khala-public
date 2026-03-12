@@ -10,6 +10,14 @@ from pathlib import Path
 
 
 VALID_VISIBILITIES = {"public", "private"}
+CLUSTER_KEYWORDS = {
+    "programming": ["code", "python", "rust", "javascript", "algorithm", "function"],
+    "architecture": ["system", "design", "pattern", "structure", "component"],
+    "learning": ["book", "article", "course", "paper", "study"],
+    "philosophy": ["theory", "concept", "idea", "philosophy", "thought"],
+    "project": ["project", "app", "tool", "library", "framework"],
+    "people": ["person", "author", "developer", "team", "company"],
+}
 
 
 def slugify(title: str) -> str:
@@ -21,20 +29,18 @@ def slugify(title: str) -> str:
 
 def get_cluster_suggestion(title: str, tags: list[str]) -> str:
     """Suggest a semantic cluster based on title and tags."""
-    clusters = {
-        "programming": ["code", "python", "rust", "javascript", "algorithm", "function"],
-        "architecture": ["system", "design", "pattern", "structure", "component"],
-        "learning": ["book", "article", "course", "paper", "study"],
-        "philosophy": ["theory", "concept", "idea", "philosophy", "thought"],
-        "project": ["project", "app", "tool", "library", "framework"],
-        "people": ["person", "author", "developer", "team", "company"],
-    }
-
-    text = (title + " " + " ".join(tags)).lower()
-    for cluster, keywords in clusters.items():
+    text = f"{title} {' '.join(tags)}".lower()
+    for cluster, keywords in CLUSTER_KEYWORDS.items():
         if any(keyword in text for keyword in keywords):
             return cluster
     return "concepts"
+
+
+def parse_tags(tags_argument: str | None) -> list[str]:
+    """Convert comma-separated CLI tag input into a list."""
+    if not tags_argument:
+        return []
+    return [tag.strip() for tag in tags_argument.split(",")]
 
 
 def render_template(
@@ -116,7 +122,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_parser().parse_args()
     repo_root = Path(__file__).resolve().parent.parent
-    tags = [tag.strip() for tag in args.tags.split(",")] if args.tags else []
+    tags = parse_tags(args.tags)
     create_note(
         repo_root,
         args.title,

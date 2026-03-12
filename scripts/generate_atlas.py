@@ -13,6 +13,7 @@ import yaml
 
 
 VALID_VISIBILITY_FILTERS = {"all", "public", "private"}
+NOTE_VISIBILITIES = {"public", "private"}
 
 
 def split_frontmatter(content: str) -> tuple[dict[str, Any], str]:
@@ -45,7 +46,7 @@ def parse_note(path: Path) -> dict[str, Any]:
         raise ValueError(f"tags must be a list in {path}")
 
     visibility = str(frontmatter.get("visibility", "public")).strip().lower()
-    if visibility not in {"public", "private"}:
+    if visibility not in NOTE_VISIBILITIES:
         raise ValueError(f"Unsupported visibility '{visibility}' in {path}")
 
     return {
@@ -100,10 +101,8 @@ def find_subclusters(
 
     tag_groups: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
     for note in notes:
-        if note["tags"]:
-            tag_groups[note["tags"][0]].append(note)
-        else:
-            tag_groups["misc"].append(note)
+        first_tag = note["tags"][0] if note["tags"] else "misc"
+        tag_groups[first_tag].append(note)
 
     sorted_groups = sorted(tag_groups.items(), key=lambda item: len(item[1]), reverse=True)
     result: list[tuple[str, list[dict[str, Any]]]] = []
@@ -132,6 +131,9 @@ def format_atlas(clusters: dict[str, list[dict[str, Any]]]) -> str:
         "",
     ]
 
+    def wiki_link(note: dict[str, Any]) -> str:
+        return f"[[{note['title']}|{note['path'].stem}]]"
+
     sorted_clusters = sorted(clusters.items(), key=lambda item: len(item[1]), reverse=True)
 
     for cluster_name, notes in sorted_clusters:
@@ -144,7 +146,7 @@ def format_atlas(clusters: dict[str, list[dict[str, Any]]]) -> str:
         subclusters = find_subclusters(notes)
         if len(subclusters) == 1 and subclusters[0][0] == "all":
             for note in sorted(notes, key=lambda item: item["title"]):
-                lines.append(f"- [[{note['title']}|{note['path'].stem}]]")
+                lines.append(f"- {wiki_link(note)}")
                 if note["source"]:
                     lines.append(f"  Source: {note['source']}")
         else:
@@ -154,7 +156,7 @@ def format_atlas(clusters: dict[str, list[dict[str, Any]]]) -> str:
                 lines.append(f"{len(sub_notes)} notes")
                 lines.append("")
                 for note in sorted(sub_notes, key=lambda item: item["title"]):
-                    lines.append(f"- [[{note['title']}|{note['path'].stem}]]")
+                    lines.append(f"- {wiki_link(note)}")
                 lines.append("")
 
         lines.append("")
@@ -165,13 +167,13 @@ def format_atlas(clusters: dict[str, list[dict[str, Any]]]) -> str:
     recent = sorted(all_notes, key=lambda item: item.get("created", ""), reverse=True)[:10]
     for note in recent:
         created = note.get("created", "unknown")[:10]
-        lines.append(f"- [[{note['title']}|{note['path'].stem}]] - {created}")
+        lines.append(f"- {wiki_link(note)} - {created}")
 
     lines.extend(["", "### Orphaned Notes (no links)"])
     orphans = [note for note in all_notes if not note["links"]]
     if orphans:
         for note in orphans[:10]:
-            lines.append(f"- [[{note['title']}|{note['path'].stem}]]")
+            lines.append(f"- {wiki_link(note)}")
     else:
         lines.append("All notes are connected.")
 

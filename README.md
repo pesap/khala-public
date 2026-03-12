@@ -4,8 +4,9 @@ A pure-markdown knowledge base inspired by
 [Gabriel Gonzalez's semantic navigator](https://haskellforall.com/2026/02/browse-code-by-meaning)
 but built entirely in markdown.
 
-This repo is the public mirror of the canonical `khala` knowledge base. It only
-contains notes that were marked safe to publish.
+This repo is the canonical private knowledge base. Notes can be marked `public`
+or `private`, and public notes can be exported into a separate `khala-public`
+repository.
 
 ## Philosophy
 
@@ -26,12 +27,12 @@ kb/
 └── README.md       # This file
 ```
 
-## Public Mirror Model
+## Visibility Model
 
-- all tracked notes in this repo should use `visibility: public`
-- private notes never appear here
-- `atlas.md` is generated from the public subset only
-- the canonical private repo is responsible for exporting updates here
+- `visibility: private` means the note stays only in this repo
+- `visibility: public` means the note can be exported to `khala-public`
+- `atlas.md` in this repo includes all notes
+- Public export fails if a public note links to a private note title
 
 ## Quick Start
 
@@ -39,8 +40,8 @@ kb/
 # Install dependencies
 uv sync
 
-# Add a public note
-uv run python scripts/add_note.py "My New Concept" --visibility public
+# Add a new private note (default)
+uv run python scripts/add_note.py "My New Concept"
 
 # Add a public note with metadata
 uv run python scripts/add_note.py "Rust Ownership" \
@@ -49,7 +50,10 @@ uv run python scripts/add_note.py "Rust Ownership" \
   --visibility public
 
 # Regenerate semantic atlas
-uv run python scripts/generate_atlas.py --visibility public
+uv run python scripts/generate_atlas.py
+
+# Export only public notes to a sibling repo
+uv run python scripts/export_public.py ../khala-public
 
 # Browse by opening atlas.md
 ```
@@ -63,7 +67,7 @@ Every note uses YAML frontmatter + markdown content:
 title: Concept Name
 created: 2026-03-11
 source: https://example.com/article
-visibility: public
+visibility: private
 semantic_cluster: programming
 tags: [rust, memory]
 ---
@@ -95,11 +99,20 @@ Unlike Gabriel's tool (which uses embeddings), this KB uses a hybrid approach:
 3. **Keyword matching**: Auto-suggest clusters on note creation
 4. **Future**: Add optional embedding-based clustering
 
-## Publishing Flow
+## Public Export
 
-This repository is usually updated by exporting from the canonical private repo.
-If you edit notes here directly, keep everything public-safe and regenerate the
-atlas before committing.
+Public export is an explicit step. It copies only `visibility: public` notes and
+the supporting public-safe project files into another repo.
+
+```bash
+uv run python scripts/export_public.py ../khala-public
+```
+
+Before exporting, the validator checks that:
+
+- no public note links to a private note with `[[Wiki Links]]`
+- no public and private notes share the same title
+- no public and private notes share the same slug
 
 ## Usage Patterns
 
@@ -107,14 +120,16 @@ atlas before committing.
 
 ```bash
 # Capture a new idea
-uv run python scripts/add_note.py "Idea about distributed systems" \
-  --visibility public
+uv run python scripts/add_note.py "Idea about distributed systems"
 
 # Later, refine and link
 # Edit notes/knowledge-base-structure.md
 
 # Regenerate atlas
-uv run python scripts/generate_atlas.py --visibility public
+uv run python scripts/generate_atlas.py
+
+# Export public notes when ready
+uv run python scripts/export_public.py ../khala-public
 ```
 
 ### Adding Sources
@@ -122,13 +137,11 @@ uv run python scripts/generate_atlas.py --visibility public
 ```bash
 # From a book
 uv run python scripts/add_note.py "Thinking Fast and Slow" \
-  --source "Kahneman, 2011" \
-  --visibility public
+  --source "Kahneman, 2011"
 
 # From an article
 uv run python scripts/add_note.py "Semantic Navigator" \
-  --source "https://haskellforall.com/2026/02/browse-code-by-meaning" \
-  --visibility public
+  --source "https://haskellforall.com/2026/02/browse-code-by-meaning"
 ```
 
 ### Browsing
@@ -137,6 +150,7 @@ uv run python scripts/add_note.py "Semantic Navigator" \
 2. Jump to clusters by meaning
 3. Follow wiki-links to explore
 4. Check "Orphaned Notes" for unlinked ideas
+5. Export public notes into `khala-public` when you want to publish them
 
 ## Future Enhancements
 

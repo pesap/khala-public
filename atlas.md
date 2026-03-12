@@ -19,13 +19,6 @@ Semantic map of the knowledge base. Browse by meaning, not by folder.
   Source:
   https://www.energy.gov/sites/prod/files/2015/09/f26/16-RM2015-Tylavsky.pdf
 
-## Sources
-
-1 notes
-
-- [[Energy System Reliability|energy-system-reliability]] Source:
-  https://www.energy.gov/sites/prod/files/2015/09/f26/16-RM2015-Tylavsky.pdf
-
 ## Meta
 
 1 notes
@@ -38,6 +31,14 @@ Semantic map of the knowledge base. Browse by meaning, not by folder.
 
 - [[Knowledge Organization|knowledge-organization]] Source:
   https://en.wikipedia.org/wiki/Knowledge_management
+
+## Sources
+
+1 notes
+
+- [[Power System and LMP Fundamentals (Litvinov 2008)|litvinov-power-system-lmp-fundamentals-2008]]
+  Source:
+  https://faculty.sites.iastate.edu/tesfatsi/archive/econ458/tesfatsion/lmp.AdvancedWPM.ELitvinovWEM301.pdf
 
 ## Navigation
 
@@ -61,7 +62,8 @@ Semantic map of the knowledge base. Browse by meaning, not by folder.
 
 - [[Attribute-Preserving Optimal Network Reductions|attribute-preserving-optimal-network-reductions]] -
   2026-03-12
-- [[Energy System Reliability|energy-system-reliability]] - 2026-03-12
+- [[Power System and LMP Fundamentals (Litvinov 2008)|litvinov-power-system-lmp-fundamentals-2008]] -
+  2026-03-12
 - [[Semantic Navigation|semantic-navigation]] - 2026-03-11
 - [[Knowledge Organization|knowledge-organization]] - 2026-03-11
 - [[Zettelkasten|zettelkasten]] - 2026-03-11
@@ -71,4 +73,4 @@ Semantic map of the knowledge base. Browse by meaning, not by folder.
 
 ### Orphaned Notes (no links)
 
-- [[Energy System Reliability|energy-system-reliability]]
+All notes are connected.

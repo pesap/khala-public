@@ -13,6 +13,11 @@ if str(SCRIPT_DIR) not in sys.path:
 from generate_atlas import collect_note_paths, parse_note  # noqa: E402
 
 
+def find_collisions(values_a: set[str], values_b: set[str]) -> list[str]:
+    """Return sorted values that appear in both sets."""
+    return sorted(values_a & values_b)
+
+
 def validate_public_notes(repo_root: Path) -> None:
     """Raise ValueError if public notes expose private note information."""
     notes = [parse_note(note_path) for note_path in collect_note_paths(repo_root)]
@@ -21,13 +26,13 @@ def validate_public_notes(repo_root: Path) -> None:
 
     public_titles = {note["title"] for note in public_notes}
     private_titles = {note["title"] for note in private_notes}
-    title_collisions = sorted(public_titles & private_titles)
+    title_collisions = find_collisions(public_titles, private_titles)
     if title_collisions:
         raise ValueError(f"Title collision between public and private notes: {title_collisions}")
 
     public_slugs = {note["path"].stem for note in public_notes}
     private_slugs = {note["path"].stem for note in private_notes}
-    slug_collisions = sorted(public_slugs & private_slugs)
+    slug_collisions = find_collisions(public_slugs, private_slugs)
     if slug_collisions:
         raise ValueError(f"Slug collision between public and private notes: {slug_collisions}")
 
