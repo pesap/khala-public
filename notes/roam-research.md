@@ -47,8 +47,9 @@ But loses:
 - Real-time graph queries
 - Live collaboration
 
-See [[Knowledge Organization]] for trade-offs.
+See [[Knowledge Organization]]
+([Knowledge Organization](knowledge-organization.md)) for trade-offs.
 
 ## Backlinks
 
-- [[Zettelkasten]]
+- [[Zettelkasten]] ([Zettelkasten](zettelkasten.md))

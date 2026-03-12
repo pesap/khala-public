@@ -40,8 +40,9 @@ You can achieve similar results with:
 - Generated semantic atlas
 - Version control for history
 
-See [[Knowledge Base Structure]] for the approach.
+See [[Knowledge Base Structure]]
+([Knowledge Base Structure](knowledge-base-structure.md)) for the approach.
 
 ## Backlinks
 
-- [[Zettelkasten]]
+- [[Zettelkasten]] ([Zettelkasten](zettelkasten.md))

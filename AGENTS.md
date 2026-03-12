@@ -57,6 +57,12 @@ Set `semantic_cluster` based on the note's primary nature:
 - Place context-relevant links in body content
 - Update "Backlinks" section manually or regenerate via script
 
+### Markdown Link Pairing
+
+- For each wiki-link in note prose, related lists, or backlinks, also add a
+  standard Markdown link: `[[Note Title]] ([Note Title](note-title.md))`
+- This keeps links navigable in pure GitHub markdown and in wiki-link tools
+
 ### When to Link
 
 - Connect related concepts (bidirectional if possible)

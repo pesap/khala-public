@@ -29,12 +29,13 @@ This creates a "web of thought" rather than a rigid hierarchy.
 
 ## Modern Implementations
 
-- [[Obsidian]] - graph-based markdown notes
-- [[Roam Research]] - block-level references
-- [[Notion]] - flexible databases
+- [[Obsidian]] ([Obsidian](obsidian.md)) - graph-based markdown notes
+- [[Roam Research]] ([Roam Research](roam-research.md)) - block-level references
+- [[Notion]] ([Notion](notion.md)) - flexible databases
 
 But pure markdown with wiki-links works just as well.
 
 ## Backlinks
 
 - [[Knowledge Organization]]
+  ([Knowledge Organization](knowledge-organization.md))

@@ -24,7 +24,8 @@ Gabriel Gonzalez's approach uses embeddings to cluster files semantically.
 Traditional folder structures are arbitrary. They reflect the creator's mental
 model at a point in time, not the semantic relationships between ideas.
 
-[[Knowledge Organization]] shows alternative approaches.
+[[Knowledge Organization]] ([Knowledge Organization](knowledge-organization.md))
+shows alternative approaches.
 
 ## Implementation
 
@@ -38,4 +39,5 @@ The semantic navigator uses:
 ## Backlinks
 
 - [[Knowledge Base Structure]]
-- [[Semantic Clustering]]
+  ([Knowledge Base Structure](knowledge-base-structure.md))
+- [[Semantic Clustering]] ([Semantic Clustering](semantic-clustering.md))
