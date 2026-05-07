@@ -26,6 +26,12 @@ Semantic map of the knowledge base. Browse by meaning, not by folder.
 - [[Roam Research|roam-research]] ([Roam Research](notes/roam-research.md))
   Source: https://roamresearch.com
 
+## Quantum Computing
+1 notes
+
+- [[Artificial intelligence for quantum computing - Review|ai-for-quantum-computing-alexeev-et-al-2025]] ([Artificial intelligence for quantum computing - Review](notes/ai-for-quantum-computing-alexeev-et-al-2025.md))
+  Source: https://www.nature.com/articles/s41467-025-65836-3
+
 ## Power Systems
 1 notes
 
